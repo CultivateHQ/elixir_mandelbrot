@@ -1,4 +1,7 @@
 defmodule Mandelbrot do
+  @moduledoc """
+  Mandlebrot fractal calculator
+  """
   @max_iterations 10
 
   def iterate(c, z), do: iterate(c, z, 1)
