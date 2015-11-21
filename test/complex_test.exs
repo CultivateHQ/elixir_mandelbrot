@@ -32,10 +32,10 @@ defmodule ComplexTest do
   end
 
   test "the magnitude can be calculated" do
-    assert Complex.new(1, 1) |> Complex.mod == :math.sqrt(2)
-    assert Complex.new(-3, 4) |> Complex.mod == 5
+    assert {1, 1} |> Complex.new |> Complex.mod == :math.sqrt(2)
+    assert {-3, 4} |> Complex.new |> Complex.mod == 5
 
-    result = (Complex.new(-1, :math.sqrt(3)) |> Complex.mod)
+    result = {-1, :math.sqrt(3)} |> Complex.new |> Complex.mod
     assert_in_delta result, 2, @epsilon
   end
 end
