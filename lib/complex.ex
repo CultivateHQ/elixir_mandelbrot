@@ -9,21 +9,21 @@ defmodule Complex do
     %__MODULE__{re: re, im: im}
   end
 
-  def add(a, b) do
+  def add(a = %__MODULE__{}, b = %__MODULE__{}) do
     new(a.re + b.re, a.im + b.im)
   end
 
-  def subtract(a, b) do
+  def subtract(a = %__MODULE__{}, b = %__MODULE__{}) do
     new(a.re - b.re, a.im - b.im)
   end
 
-  def mult(a, b) do
+  def mult(a = %__MODULE__{}, b = %__MODULE__{}) do
     re = (a.re * b.re) + (a.im * b.im * -1)
     im = (a.re * b.im) + (b.re * a.im)
     new(re, im)
   end
 
-  def mod(a) do
+  def mod(a = %__MODULE__{}) do
     :math.sqrt(a.re * a.re + a.im * a.im)
   end
 end
