@@ -3,14 +3,26 @@ defmodule ComplexTest do
   # Calculated by trial and error :(
   @epsilon 1.0e-15
 
-  test "can be created with a real and imaginary parts" do
-    z = Complex.new(1, 2)
+  test "can be created with numbers representing real and imaginary parts" do
+    z = Complex.new(1, 2.0)
     assert z.re == 1
     assert z.im == 2
   end
 
   test "can be created from a 2-tuple of real and imaginary parts" do
     assert Complex.new(1, 2) == Complex.new({1, 2})
+  end
+
+  test "cannot be created with non-numeric parts" do
+    assert_raise FunctionClauseError, fn ->
+      {:not_a_number, 1} |> Complex.new
+    end
+    assert_raise FunctionClauseError, fn ->
+      {1, :not_a_number} |> Complex.new
+    end
+    assert_raise FunctionClauseError, fn ->
+      {:not_a_number, "also not a number"} |> Complex.new
+    end
   end
 
   test "two can be added together" do
