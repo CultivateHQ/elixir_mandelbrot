@@ -1,5 +1,7 @@
 defmodule ComplexTest do
   use ExUnit.Case
+  # Calculated by trial and error :(
+  @epsilon 1.0e-15
 
   test "can be created with a real and imaginary parts" do
     z = Complex.new(1, 2)
@@ -23,5 +25,13 @@ defmodule ComplexTest do
     a = Complex.new(2, -7)
     b = Complex.new(3, 2)
     assert a |> Complex.mult(b) == Complex.new(20, -17)
+  end
+
+  test "the magnitude can be calculated" do
+    assert Complex.new(1, 1) |> Complex.mod == :math.sqrt(2)
+    assert Complex.new(-3, 4) |> Complex.mod == 5
+
+    result = (Complex.new(-1, :math.sqrt(3)) |> Complex.mod)
+    assert_in_delta result, 2, @epsilon
   end
 end

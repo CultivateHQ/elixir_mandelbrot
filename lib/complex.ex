@@ -18,4 +18,8 @@ defmodule Complex do
     im = (a.re * b.im) + (b.re * a.im)
     new(re, im)
   end
+
+  def mod(a) do
+    :math.sqrt(a.re * a.re + a.im * a.im)
+  end
 end
