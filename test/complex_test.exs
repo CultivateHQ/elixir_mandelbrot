@@ -12,4 +12,10 @@ defmodule ComplexTest do
     b = Complex.new(1, 2)
     assert a |> Complex.add(b) == Complex.new(2, 4)
   end
+
+  test "two can be subtracted" do
+    a = Complex.new(3, 4)
+    b = Complex.new(1, 1)
+    assert a |> Complex.subtract(b) == Complex.new(2, 3)
+  end
 end

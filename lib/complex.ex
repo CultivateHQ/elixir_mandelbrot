@@ -8,4 +8,8 @@ defmodule Complex do
   def add(a, b) do
     new(a.re + b.re, a.im + b.im)
   end
+
+  def subtract(a, b) do
+    new(a.re - b.re, a.im - b.im)
+  end
 end
