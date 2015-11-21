@@ -9,6 +9,10 @@ defmodule ComplexTest do
     assert z.im == 2
   end
 
+  test "can be created from a 2-tuple of real and imaginary parts" do
+    assert Complex.new(1, 2) == Complex.new({1, 2})
+  end
+
   test "two can be added together" do
     a = Complex.new(1, 2)
     b = Complex.new(1, 2)
