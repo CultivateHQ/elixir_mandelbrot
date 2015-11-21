@@ -18,4 +18,10 @@ defmodule ComplexTest do
     b = Complex.new(1, 1)
     assert a |> Complex.subtract(b) == Complex.new(2, 3)
   end
+
+  test "can be multiplied" do
+    a = Complex.new(2, -7)
+    b = Complex.new(3, 2)
+    assert a |> Complex.mult(b) == Complex.new(20, -17)
+  end
 end

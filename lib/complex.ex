@@ -12,4 +12,10 @@ defmodule Complex do
   def subtract(a, b) do
     new(a.re - b.re, a.im - b.im)
   end
+
+  def mult(a, b) do
+    re = (a.re * b.re) + (a.im * b.im * -1)
+    im = (a.re * b.im) + (b.re * a.im)
+    new(re, im)
+  end
 end
