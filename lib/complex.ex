@@ -1,4 +1,7 @@
 defmodule Complex do
+  @moduledoc """
+  A simple attempt at complex numbers
+  """
   defstruct re: 0, im: 0
 
   def new(re, im) do
