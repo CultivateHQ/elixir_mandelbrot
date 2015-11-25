@@ -1,5 +1,6 @@
 defmodule MandelbrotSetTest do
   use ExUnit.Case
+  @epsilon 0.1e-14
 
   test "#apply_polynomial" do
     z = Complex.new(1, 1)
@@ -25,5 +26,22 @@ defmodule MandelbrotSetTest do
 
     assert MandelbrotSet.iterate_until(c, stop_at_1) == 1
     assert MandelbrotSet.iterate_until(c, stop_at_2) == 2
+  end
+
+  test "#unbounded?: returns true if absolute value of z is greater than 2" do
+    # Evaluates to the smallest amount less than 2
+    bounded = Complex.new(2 - @epsilon, 0)
+    assert bounded |> Complex.mod <= 2
+    refute bounded |> MandelbrotSet.unbounded?
+
+    # Evaluates to 2 exactly
+    bounded = Complex.new(2, 0)
+    assert bounded |> Complex.mod <= 2
+    refute bounded |> MandelbrotSet.unbounded?
+
+    # Evaluates to the smallest amount greater than 2
+    unbounded = Complex.new(2 + @epsilon, 0)
+    assert unbounded |> Complex.mod > 2
+    assert unbounded |> MandelbrotSet.unbounded?
   end
 end

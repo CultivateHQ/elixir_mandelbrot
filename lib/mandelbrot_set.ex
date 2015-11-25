@@ -39,4 +39,16 @@ defmodule MandelbrotSet do
       do_iterate_until(c, z_next, iteration_count + 1, f_stop_iterating)
     end
   end
+
+  @doc """
+  A predicate to check if the value of z has exceeded the limit known to
+  characterise a value within the Mandelbrot set.
+
+  If |z| has exceeded 2 we know for sure that the sequence being calculated is
+  unbounded and will tend towards infinity. Numbers within the Mandelbrot set
+  tend towards 2 as you continue to iterate, but never exceed it.
+  """
+  def unbounded?(z) do
+    Complex.mod(z) > 2
+  end
 end
