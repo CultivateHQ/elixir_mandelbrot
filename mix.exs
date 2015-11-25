@@ -28,7 +28,9 @@ defmodule Mandelbrot.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:dogma, "~> 0.0", only: :dev}
+      {:dogma, "~> 0.0", only: :dev},
+      {:earmark, "~> 0.1", only: :dev},
+      {:ex_doc, "~> 0.11", only: :dev}
     ]
   end
 end
