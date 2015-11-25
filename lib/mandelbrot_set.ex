@@ -17,4 +17,26 @@ defmodule MandelbrotSet do
     z_squared = Complex.multiply(z, z)
     Complex.add(z_squared, c)
   end
+
+  @doc """
+  Given a complex constant `c`, this function starts with `z = 0` and
+  iteratively calls `apply_polynomial(z, c)` to calculate the next `z` value.
+
+  It stops when `f_stop_iterating` returns true.
+
+  It returns the number of iterations reached before `f_stop_iterating`
+  returned true.
+  """
+  def iterate_until(c, f_stop_iterating) do
+    do_iterate_until(c, Complex.new(0.0, 0.0), 0, f_stop_iterating)
+  end
+
+  defp do_iterate_until(c, z, iteration_count, f_stop_iterating) do
+    if f_stop_iterating.(z, iteration_count) do
+      iteration_count
+    else
+      z_next = apply_polynomial(z, c)
+      do_iterate_until(c, z_next, iteration_count + 1, f_stop_iterating)
+    end
+  end
 end
