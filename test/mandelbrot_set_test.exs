@@ -2,6 +2,14 @@ defmodule MandelbrotSetTest do
   use ExUnit.Case
   @epsilon 0.1e-14
 
+  test "#count_iterations: counts until max_iterations or" do
+    not_in_the_set = Complex.new(1, 0)
+    in_the_set = Complex.new(-1, 0)
+
+    assert MandelbrotSet.count_iterations(not_in_the_set, 100) == 3
+    assert MandelbrotSet.count_iterations(in_the_set, 100) == 100
+  end
+
   test "#apply_polynomial" do
     z = Complex.new(1, 1)
     c = Complex.new(1, 1)

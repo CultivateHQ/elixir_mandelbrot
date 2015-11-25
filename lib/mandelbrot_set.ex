@@ -10,6 +10,19 @@ defmodule MandelbrotSet do
   """
 
   @doc """
+  Given a complex number `c`, returns the number of iterations needed to prove
+  whether it is a member of the Mandelbrot set, up to a maximum of
+  `max_iterations`.
+  """
+  def count_iterations(c, max_iterations) do
+    should_stop? = fn (z, iteration_count) ->
+      iteration_count >= max_iterations or unbounded?(z)
+    end
+
+    iterate_until(c, should_stop?)
+  end
+
+  @doc """
   Implements the complex quadratic polynomial that is at the heart of the
   Mandelbrot set: `f(Z): Z^2 + C`
   """
