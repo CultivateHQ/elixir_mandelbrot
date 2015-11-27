@@ -17,7 +17,7 @@ defmodule Complex do
     new(a.re - b.re, a.im - b.im)
   end
 
-  def mult(a = %__MODULE__{}, b = %__MODULE__{}) do
+  def multiply(a = %__MODULE__{}, b = %__MODULE__{}) do
     re = (a.re * b.re) + (a.im * b.im * -1)
     im = (a.re * b.im) + (b.re * a.im)
     new(re, im)

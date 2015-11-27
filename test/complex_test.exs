@@ -40,7 +40,7 @@ defmodule ComplexTest do
   test "can be multiplied" do
     a = Complex.new(2, -7)
     b = Complex.new(3, 2)
-    assert a |> Complex.mult(b) == Complex.new(20, -17)
+    assert a |> Complex.multiply(b) == Complex.new(20, -17)
   end
 
   test "the magnitude can be calculated" do
