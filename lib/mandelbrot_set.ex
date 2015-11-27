@@ -9,11 +9,23 @@ defmodule MandelbrotSet do
   * http://stackoverflow.com/questions/425953/how-to-program-a-fractal
   """
 
+  @typedoc """
+  An integer value representing the number of repeats of the core calculation
+  """
+  @type iteration_count :: integer
+  @typedoc """
+  A predicate used to stop iteration.
+
+  Returns false to continue iteration, returns true to stop.
+  """
+  @type iteration_stop_function :: (Complex.t, iteration_count -> boolean)
+
   @doc """
   Given a complex number `c`, returns the number of iterations needed to prove
   whether it is a member of the Mandelbrot set, up to a maximum of
   `max_iterations`.
   """
+  @spec count_iterations(Complex.t, integer) :: iteration_count
   def count_iterations(c, max_iterations) do
     should_stop? = fn (z, iteration_count) ->
       iteration_count >= max_iterations or unbounded?(z)
@@ -26,6 +38,7 @@ defmodule MandelbrotSet do
   Implements the complex quadratic polynomial that is at the heart of the
   Mandelbrot set: `f(Z): Z^2 + C`
   """
+  @spec apply_polynomial(Complex.t, Complex.t) :: Complex.t
   def apply_polynomial(z, c) do
     z_squared = Complex.multiply(z, z)
     Complex.add(z_squared, c)
@@ -40,6 +53,7 @@ defmodule MandelbrotSet do
   It returns the number of iterations reached before `f_stop_iterating`
   returned true.
   """
+  @spec iterate_until(Complex.t, iteration_stop_function) :: iteration_count
   def iterate_until(c, f_stop_iterating) do
     do_iterate_until(c, Complex.new(0.0, 0.0), 0, f_stop_iterating)
   end
@@ -61,6 +75,7 @@ defmodule MandelbrotSet do
   unbounded and will tend towards infinity. Numbers within the Mandelbrot set
   tend towards 2 as you continue to iterate, but never exceed it.
   """
+  @spec unbounded?(Complex.t) :: boolean
   def unbounded?(z) do
     Complex.mod(z) > 2
   end
