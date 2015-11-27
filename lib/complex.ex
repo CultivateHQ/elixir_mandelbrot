@@ -4,7 +4,6 @@ defmodule Complex do
   """
   defstruct re: 0, im: 0
 
-  def new({re, im}), do: new(re, im)
   def new(re, im) when is_number(re) and is_number(im) do
     %__MODULE__{re: re, im: im}
   end
