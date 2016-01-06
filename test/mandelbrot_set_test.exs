@@ -2,11 +2,15 @@ defmodule MandelbrotSetTest do
   use ExUnit.Case
   @epsilon 0.1e-14
 
-  test "#count_iterations: counts until max_iterations or" do
+  test "#count_iterations: returns the number of iterations needed to  " <>
+       "prove c is not a member of the Mandelbrot set" do
     not_in_the_set = Complex.new(1, 0)
-    in_the_set = Complex.new(-1, 0)
-
     assert MandelbrotSet.count_iterations(not_in_the_set, 100) == 3
+  end
+
+  test "#count_iterations: returns max_iterations if exclusion from the " <>
+       "Mandelbrot set cannot be proven within max_iterations iterations" do
+    in_the_set = Complex.new(-1, 0)
     assert MandelbrotSet.count_iterations(in_the_set, 100) == 100
   end
 
@@ -20,7 +24,6 @@ defmodule MandelbrotSetTest do
     c = Complex.new(1, 1)
     stop_iterating = fn (_z, _iteration_count) -> true end
 
-    assert MandelbrotSet.iterate_until(c, stop_iterating) == 0
     assert MandelbrotSet.iterate_until(c, stop_iterating) == 0
   end
 
