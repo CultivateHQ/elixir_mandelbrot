@@ -48,22 +48,22 @@ defmodule MandelbrotSet do
   Given a complex constant `c`, this function starts with `z = 0` and
   iteratively calls `apply_polynomial(z, c)` to calculate the next `z` value.
 
-  It stops when `f_stop_iterating` returns true.
+  It stops when `stop_iterating?` returns true.
 
-  It returns the number of iterations reached before `f_stop_iterating`
+  It returns the number of iterations reached before `stop_iterating?`
   returned true.
   """
   @spec iterate_until(Complex.t, iteration_stop_function) :: iteration_count
-  def iterate_until(c, f_stop_iterating) do
-    do_iterate_until(c, Complex.new(0.0, 0.0), 0, f_stop_iterating)
+  def iterate_until(c, stop_iterating?) do
+    do_iterate_until(c, Complex.new(0.0, 0.0), 0, stop_iterating?)
   end
 
-  defp do_iterate_until(c, z, iteration_count, f_stop_iterating) do
-    if f_stop_iterating.(z, iteration_count) do
+  defp do_iterate_until(c, z, iteration_count, stop_iterating?) do
+    if stop_iterating?.(z, iteration_count) do
       iteration_count
     else
       z_next = apply_polynomial(z, c)
-      do_iterate_until(c, z_next, iteration_count + 1, f_stop_iterating)
+      do_iterate_until(c, z_next, iteration_count + 1, stop_iterating?)
     end
   end
 
