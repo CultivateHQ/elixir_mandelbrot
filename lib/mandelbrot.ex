@@ -2,26 +2,29 @@ defmodule Mandelbrot do
   @moduledoc """
   Mandlebrot fractal calculator
   """
-  @max_iterations 10
 
-  def iterate(c, z), do: iterate(c, z, 1)
-  defp iterate(_c, _z, @max_iterations), do: @max_iterations
-  defp iterate(c, z, iterations) when z < 2 do
-    # IO.puts("#{c}, #{z}, #{iterations}")
-    iterate(c, (z * z) + c, iterations + 1)
-  end
-  defp iterate(_c, _z, iterations), do: iterations
-
-  def frange(from, to, increment) do
-    Stream.unfold(from, fn
-      n when n > to -> nil
-      n -> {n, n + increment}
-    end)
+  defmodule ComplexPlane do
+    defstruct re0: 0, im0: 0, re1: 0, im1: 0
   end
 
-  def generate do
-    increment = 0.1
-    for x <- frange(-1.5, 1.5, increment),
-        y <- frange(-1.5, 1.5, increment), do: {x, y, iterate(x, y)}
+  defmodule Rectangle do
+    defstruct h: 0, w: 0
+  end
+
+  def generate(complex_plane, grid, max_iterations \\ 10) do
+    xs = Sequence.finite_lazy(grid.h, complex_plane.re0, complex_plane.re1)
+    ys = Sequence.finite_lazy(grid.w, complex_plane.im0, complex_plane.im1)
+
+    for x <- xs, y <- ys do
+      c = Complex.new(x, y)
+      iterations = MandelbrotSet.count_iterations(c, max_iterations)
+      {c, iterations}
+    end
+  end
+
+  def test(max_iterations) do
+    complex_plane = %ComplexPlane{re0: -2, im0: -2, re1: 2, im1: 2}
+    grid = %Rectangle{h: 400, w: 400}
+    generate(complex_plane, grid, max_iterations)
   end
 end
