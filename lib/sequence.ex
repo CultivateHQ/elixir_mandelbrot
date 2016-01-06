@@ -8,7 +8,7 @@ defmodule Sequence do
     first_term + (term_to_find - 1) * common_difference
   end
 
-  @spec finite_lazy(pos_integer, number, number) :: Stream.t
+  @spec finite_lazy(pos_integer, number, number) :: Enumerable.t
   def finite_lazy(num_terms, first_term, last_term) do
     common_difference = common_difference(num_terms, first_term, last_term)
     f = &(Sequence.find_term(&1, first_term, common_difference))
