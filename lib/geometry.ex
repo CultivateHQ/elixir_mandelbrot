@@ -14,6 +14,7 @@ defmodule Geometry do
     +------------(re1,im1)
     ```
     """
+    @type t :: %__MODULE__{re0: number, im0: number, re1: number, im1: number}
     defstruct re0: 0, im0: 0, re1: 0, im1: 0
   end
 
@@ -27,6 +28,7 @@ defmodule Geometry do
     +--------------------+
     ```
     """
+    @type t :: %__MODULE__{h: number, w: number}
     defstruct h: 0, w: 0
   end
 end

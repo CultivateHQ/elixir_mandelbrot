@@ -14,6 +14,8 @@ defmodule Mandelbrot do
   be the maximum number returned for those numbers whose membership cannot be
   disproven. I.e. these numbers *are* members of the Mandelbrot set.
   """
+  @spec calculate_iterations(ComplexPlane.t, Rectangle.t, pos_integer)
+    :: [{pos_integer, pos_integer, MandelbrotSet.iteration_count}]
   def calculate_iterations(complex_plane, grid, max_iterations \\ 10) do
     xs = Sequence.finite_lazy(grid.h, complex_plane.re0, complex_plane.re1)
     ys = Sequence.finite_lazy(grid.w, complex_plane.im0, complex_plane.im1)
