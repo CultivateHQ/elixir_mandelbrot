@@ -2,35 +2,8 @@ defmodule Mandelbrot do
   @moduledoc """
   Mandlebrot fractal calculator
   """
-
-  defmodule ComplexPlane do
-    @moduledoc """
-    Represents a complex plane.
-
-    This is essentially two complex numbers interpreted as two points to
-    represent a rectangular area.
-
-    ```
-    (re0,im0)------------+
-    |                    |
-    +------------(re1,im1)
-    ```
-    """
-    defstruct re0: 0, im0: 0, re1: 0, im1: 0
-  end
-
-  defmodule Rectangle do
-    @moduledoc """
-    Represents a rectangle defined by a width and a height.
-
-    ```
-    +--------(w)---------+
-    (h)                  |
-    +--------------------+
-    ```
-    """
-    defstruct h: 0, w: 0
-  end
+  alias Geometry.ComplexPlane
+  alias Geometry.Rectangle
 
   @doc """
   For each point in `complex_plane` mapped onto the rectangular `grid`,
