@@ -15,10 +15,10 @@ defmodule Mandelbrot do
     xs = Sequence.finite_lazy(grid.h, complex_plane.re0, complex_plane.re1)
     ys = Sequence.finite_lazy(grid.w, complex_plane.im0, complex_plane.im1)
 
-    for x <- xs, y <- ys do
-      c = Complex.new(x, y)
+    for {x, re} <- xs, {y, im} <- ys do
+      c = Complex.new(re, im)
       iterations = MandelbrotSet.count_iterations(c, max_iterations)
-      {c, iterations}
+      {x, y, iterations}
     end
   end
 
