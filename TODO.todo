@@ -1,0 +1,4 @@
+[ ] Build something that iterates across the pixels of an image, translates them to the "complex plane", then for each value in the complex plane work out if it is in the Mandelbrot set.
+  [ ] Write a test for Mandelbrot.calculate_iterations
+[ ] Translate the iteration counts of each number to a colour value using a colour ramp.
+[ ] Output an image.
